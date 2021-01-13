@@ -2,6 +2,7 @@ package tech.kicky.coroutine
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -9,6 +10,7 @@ import kotlinx.coroutines.*
 import tech.kicky.coroutine.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
 
     private val binding: ActivityMainBinding by lazy {
         ActivityMainBinding.inflate(layoutInflater, null, false)
@@ -19,16 +21,21 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+
 //        singleIO()
 //        processIO()
 //        cancelCoroutine()
 //        lifecycleCoroutine()
-//        viewModel.banners.observe(this, {
-//            val content: List<String> = it.map { banner ->
-//                banner.title
-//            }
-//            binding.text.text = content.toTypedArray().contentToString()
-//        })
+        viewModel.banners.observe(this, {
+            val content: List<String> = it.map { banner ->
+                banner.title
+            }
+            binding.text.text = content.toTypedArray().contentToString()
+        })
+        viewModel.toastMsg.observe(this, {
+            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+        })
 //        viewModel.hotKeys.observe(this, {
 //            val content: List<String> = it.map { key ->
 //                key.name
@@ -36,7 +43,6 @@ class MainActivity : AppCompatActivity() {
 //            binding.text.text = content.toTypedArray().contentToString()
 //        })
 //        viewModel.viewModelSequenceRequest()
-        viewModel.viewModelAsync()
     }
 
     /**

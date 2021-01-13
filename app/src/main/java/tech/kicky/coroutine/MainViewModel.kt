@@ -4,7 +4,9 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 
 /**
  * main view model
@@ -15,6 +17,8 @@ class MainViewModel : ViewModel() {
 
     val banners = MutableLiveData<List<Banner>>()
     val hotKeys = MutableLiveData<List<HotKey>>()
+    val toastMsg = MutableLiveData<String>()
+
 
     fun viewModelCoroutine() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -22,6 +26,7 @@ class MainViewModel : ViewModel() {
             banners.postValue(result.data)
         }
     }
+
 
     fun viewModelSequenceRequest() {
         viewModelScope.launch(Dispatchers.IO) {
