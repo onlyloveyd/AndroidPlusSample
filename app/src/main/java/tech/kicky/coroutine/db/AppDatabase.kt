@@ -10,7 +10,7 @@ import androidx.room.RoomDatabase
  * author: yidong
  * 2021/1/13
  */
-@Database(entities = [User::class], version = 1, exportSchema = false)
+@Database(entities = [User::class], version = 2, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
 
@@ -28,6 +28,7 @@ abstract class AppDatabase : RoomDatabase() {
 
         private fun buildDatabase(context: Context): AppDatabase {
             return Room.databaseBuilder(context, AppDatabase::class.java, "coroutine")
+                .fallbackToDestructiveMigration()
                 .build()
         }
     }
