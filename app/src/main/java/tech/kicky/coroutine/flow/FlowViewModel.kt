@@ -3,12 +3,12 @@ package tech.kicky.coroutine.flow
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.*
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import tech.kicky.coroutine.Article
 import tech.kicky.coroutine.Retrofitance
+import tech.kicky.coroutine.bus.Event
+import tech.kicky.coroutine.bus.LocalEventBus
 import tech.kicky.coroutine.db.AppDatabase
 import tech.kicky.coroutine.db.User
 
@@ -17,6 +17,8 @@ import tech.kicky.coroutine.db.User
  * author: yidong
  * 2021/1/13
  */
+@FlowPreview
+@ExperimentalCoroutinesApi
 class FlowViewModel(app: Application) : AndroidViewModel(app) {
     val users: LiveData<List<User>>
 
@@ -28,6 +30,19 @@ class FlowViewModel(app: Application) : AndroidViewModel(app) {
 
     private val _loading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean> = _loading
+
+    private val _countState = MutableStateFlow(0)
+
+    val countState = _countState.asStateFlow()
+
+    fun incrementCount() {
+        _countState.value++
+    }
+
+    fun decrementCount() {
+        _countState.value--
+    }
+
 
     init {
         users = AppDatabase.getInstance(getApplication()).userDao().getAll()
@@ -77,6 +92,14 @@ class FlowViewModel(app: Application) : AndroidViewModel(app) {
                         _toastMsg.postValue("Insert Failed")
                     }
                 }
+            }
+        }
+    }
+
+    fun startCount() {
+        viewModelScope.launch {
+            while (true) {
+                LocalEventBus.postEvent(Event(System.currentTimeMillis()))
             }
         }
     }

@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LearningCoroutine">
-        <activity android:name=".flow.FlowRetrofitActivity">
+        <activity android:name=".flow.SharedFlowActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
