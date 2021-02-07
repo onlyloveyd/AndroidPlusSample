@@ -39,6 +39,11 @@ class SharedFlowFragment : Fragment() {
         }
     }
 
+    override fun onPause() {
+        super.onPause()
+        viewModel.stopRefresh()
+    }
+
     private fun startRefresh() {
         viewModel.startRefresh()
     }

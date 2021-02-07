@@ -17,7 +17,7 @@ class EntryAdapter(context: Context, val click: (NavDirections) -> Unit) :
     BindingAdapter<Pair<String, NavDirections>>(context) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindingViewHolder {
-        val binding = RvItemTextBinding.inflate(layoutInflater)
+        val binding = RvItemTextBinding.inflate(layoutInflater, parent, false)
         return BindingViewHolder(binding)
     }
 

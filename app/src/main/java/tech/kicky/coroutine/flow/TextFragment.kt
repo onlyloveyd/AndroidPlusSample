@@ -28,11 +28,15 @@ class TextFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        return mBinding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
         lifecycleScope.launchWhenStarted {
             LocalEventBus.events.collect {
                 mBinding.tvTime.text = it.timestamp.toString()
             }
         }
-        return mBinding.root
     }
 }

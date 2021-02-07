@@ -5,12 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.DividerItemDecoration
 import tech.kicky.common.addDivider
 import tech.kicky.databinding.FragmentHomeBinding
-import tech.kicky.storage.ScopedStorageFragment
 
 /**
  * Entry Fragment
@@ -21,7 +18,7 @@ import tech.kicky.storage.ScopedStorageFragment
 class HomeFragment : Fragment() {
 
     private val pairs = listOf(
-        "Coroutine" to HomeFragmentDirections.homeToCoroutineSample(),
+        "Kotlin Coroutine" to HomeFragmentDirections.homeToCoroutineSample(),
         "Scoped Storage" to HomeFragmentDirections.homeToScopedStorage()
     )
     private lateinit var mAdapter: EntryAdapter
