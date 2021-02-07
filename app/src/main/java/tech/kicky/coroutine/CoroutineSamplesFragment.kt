@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import tech.kicky.EntryAdapter
+import tech.kicky.common.addDivider
 import tech.kicky.databinding.FragmentCoroutineSamplesBinding
 import tech.kicky.storage.ScopedStorageFragment
 
@@ -46,6 +47,7 @@ class CoroutineSamplesFragment : Fragment() {
             }
             mAdapter.setData(pairs)
             mBinding.sampleList.adapter = mAdapter
+            mBinding.sampleList.addDivider(it)
         }
     }
 }
