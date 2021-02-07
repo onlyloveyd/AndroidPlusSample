@@ -27,7 +27,6 @@ class MainViewModel : ViewModel() {
         }
     }
 
-
     fun viewModelSequenceRequest() {
         viewModelScope.launch(Dispatchers.IO) {
             val start = System.currentTimeMillis()

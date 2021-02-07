@@ -1,33 +1,31 @@
-package tech.kicky.coroutine
+package tech.kicky
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
-import tech.kicky.EntryAdapter
-import tech.kicky.databinding.FragmentCoroutineSamplesBinding
+import tech.kicky.databinding.FragmentHomeBinding
 import tech.kicky.storage.ScopedStorageFragment
 
 /**
- * Coroutine Samples Fragment
- * author: yidong
- * 2021/2/6
+ * Entry Fragment
+ *
+ * @author yidong
+ * @date 2/7/21
  */
-class CoroutineSamplesFragment : Fragment() {
-
-    private lateinit var mAdapter: EntryAdapter
+class HomeFragment : Fragment() {
 
     private val pairs = listOf(
-        "Basic Coroutine" to CoroutineSamplesFragmentDirections.coroutineToBasic(),
-        "Flow & Room" to CoroutineSamplesFragmentDirections.coroutineToFlow(),
-        "Flow & Retrofit" to CoroutineSamplesFragmentDirections.coroutineToFlowRetrofit(),
-        "Shared Flow" to CoroutineSamplesFragmentDirections.coroutineToSharedFlow()
+        "Coroutine" to HomeFragmentDirections.homeToCoroutineSample(),
+        "Scoped Storage" to HomeFragmentDirections.homeToScopedStorage()
     )
+    private lateinit var mAdapter: EntryAdapter
 
-    private val mBinding by lazy {
-        FragmentCoroutineSamplesBinding.inflate(layoutInflater)
+    private val mBinding: FragmentHomeBinding by lazy {
+        FragmentHomeBinding.inflate(layoutInflater)
     }
 
     override fun onCreateView(
@@ -45,7 +43,7 @@ class CoroutineSamplesFragment : Fragment() {
                 findNavController().navigate(direction)
             }
             mAdapter.setData(pairs)
-            mBinding.sampleList.adapter = mAdapter
+            mBinding.menuList.adapter = mAdapter
         }
     }
 }

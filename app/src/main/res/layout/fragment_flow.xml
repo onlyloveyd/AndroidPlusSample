@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".flow.FlowActivity">
+    tools:context=".coroutine.flow.FlowFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -54,7 +54,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:onClick="addUser"
         android:text="Add User" />
 
     <androidx.recyclerview.widget.RecyclerView

@@ -9,7 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import tech.kicky.coroutine.bus.LocalEventBus
-import tech.kicky.coroutine.databinding.FragmentTextBinding
+import tech.kicky.databinding.FragmentTextBinding
 
 /**
  * Fragment Show Text
@@ -19,7 +19,7 @@ import tech.kicky.coroutine.databinding.FragmentTextBinding
 @InternalCoroutinesApi
 class TextFragment : Fragment() {
 
-    private val mBinding by lazy {
+    private val mBinding: FragmentTextBinding by lazy {
         FragmentTextBinding.inflate(layoutInflater, null, false)
     }
 

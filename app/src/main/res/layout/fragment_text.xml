@@ -10,6 +10,6 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:textSize="36sp"
-        tools:text="100" />
+        android:text="--" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/navigation">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="tech.kicky.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/home_to_coroutine_sample"
+            app:destination="@id/coroutineSampleFragment" />
+
+        <action
+            android:id="@+id/home_to_scoped_storage"
+            app:destination="@id/scopedStorageFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/scopedStorageFragment"
+        android:name="tech.kicky.storage.ScopedStorageFragment"
+        android:label="ScopedStorageFragment"
+        tools:layout="@layout/fragment_scoped_storage" />
+
+    <fragment
+        android:id="@+id/coroutineSampleFragment"
+        android:name="tech.kicky.coroutine.CoroutineSamplesFragment"
+        android:label="CoroutineSamplesFragment"
+        tools:layout="@layout/fragment_coroutine_samples">
+
+        <action
+            android:id="@+id/coroutine_to_basic"
+            app:destination="@id/basicCoroutineFragment" />
+        <action
+            android:id="@+id/coroutine_to_flow"
+            app:destination="@id/flowFragment" />
+        <action
+            android:id="@+id/coroutine_to_flow_retrofit"
+            app:destination="@id/flowRetrofitFragment" />
+        <action
+            android:id="@+id/coroutine_to_shared_flow"
+            app:destination="@id/sharedFlowFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/basicCoroutineFragment"
+        android:name="tech.kicky.coroutine.BasicCoroutineFragment"
+        android:label="BasicCoroutineFragment"
+        tools:layout="@layout/fragment_basic_coroutine" />
+    <fragment
+        android:id="@+id/flowFragment"
+        android:name="tech.kicky.coroutine.flow.FlowFragment"
+        android:label="FlowFragment"
+        tools:layout="@layout/fragment_flow" />
+    <fragment
+        android:id="@+id/flowRetrofitFragment"
+        android:name="tech.kicky.coroutine.flow.FlowRetrofitFragment"
+        android:label="FlowRetrofitFragment"
+        tools:layout="@layout/fragment_flow_retrofit" />
+
+    <fragment
+        android:id="@+id/sharedFlowFragment"
+        android:name="tech.kicky.coroutine.flow.SharedFlowFragment"
+        android:label="SharedFlowFragment"
+        tools:layout="@layout/fragment_shared_flow" />
 
 </navigation>

@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import tech.kicky.coroutine.Article
-import tech.kicky.coroutine.databinding.ItemUserBinding
+import tech.kicky.databinding.ItemUserBinding
 
 /**
  * Article Adapter

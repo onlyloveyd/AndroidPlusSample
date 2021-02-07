@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".flow.SharedFlowActivity">
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,6 +34,7 @@
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/bt_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|start"
@@ -42,11 +42,11 @@
         android:layout_marginLeft="8dp"
         android:layout_marginBottom="8dp"
         android:contentDescription="Start"
-        android:onClick="startRefresh"
         android:src="@drawable/ic_start"
         app:fabSize="normal" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/bt_stop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
@@ -54,7 +54,6 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:contentDescription="Stop"
-        android:onClick="endRefresh"
         android:src="@drawable/ic_stop"
         app:fabSize="normal" />
 </FrameLayout>

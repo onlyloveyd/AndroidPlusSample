@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".flow.FlowRetrofitActivity">
+    tools:context=".">
 
     <TextView
         android:id="@+id/tv_count"
@@ -21,20 +21,20 @@
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/bt_increase"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:layout_weight="1"
-            android:onClick="incrementCounter"
             android:text="+1"
             android:textSize="24sp" />
 
         <Button
+            android:id="@+id/bt_decrease"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:layout_weight="1"
-            android:onClick="decrementCounter"
             android:text="-1"
             android:textSize="24sp" />
     </LinearLayout>

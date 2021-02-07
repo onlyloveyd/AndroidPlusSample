@@ -1,4 +1,4 @@
-package tech.kicky.coroutine
+package tech.kicky
 
 import android.app.Application
 import androidx.room.Room
