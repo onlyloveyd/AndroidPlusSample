@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import tech.kicky.common.BindingViewHolder
 import tech.kicky.coroutine.db.User
 import tech.kicky.databinding.ItemUserBinding
 

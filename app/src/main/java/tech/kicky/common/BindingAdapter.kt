@@ -3,7 +3,6 @@ package tech.kicky.common
 import android.content.Context
 import android.view.LayoutInflater
 import androidx.recyclerview.widget.RecyclerView
-import tech.kicky.coroutine.flow.BindingViewHolder
 
 /**
  * Base Binding ViewHolder Adapter
