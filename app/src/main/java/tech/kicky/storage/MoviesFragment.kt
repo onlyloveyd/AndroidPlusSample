@@ -1,7 +1,9 @@
 package tech.kicky.storage
 
 import android.Manifest
-import android.os.Build
+import android.app.Activity
+import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +14,7 @@ import androidx.fragment.app.viewModels
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.permissionx.guolindev.PermissionX
 import tech.kicky.databinding.FragmentMoviesBinding
+import tech.kicky.storage.data.Movie
 import tech.kicky.storage.viewmodel.MovieViewModel
 
 /**
@@ -21,6 +24,11 @@ import tech.kicky.storage.viewmodel.MovieViewModel
  * @date 2/8/21
  */
 class MoviesFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
+
+    companion object {
+        private const val DELETE_PERMISSION_REQUEST = 0x1033
+    }
+
     private lateinit var mAdapter: MovieAdapter
 
     private val mBinding by lazy {
@@ -40,28 +48,23 @@ class MoviesFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         context?.let {
-            mAdapter = MovieAdapter(it)
+            mAdapter = MovieAdapter(it) { movie ->
+                AlertDialog.Builder(context)
+                    .setTitle("确认删除？")
+                    .setMessage("是否删除视频${movie.title}")
+                    .setPositiveButton("确定") { dialog, which ->
+                        deleteMovie(movie)
+                        dialog.dismiss()
+                    }
+                    .setNegativeButton("取消") { dialog, which ->
+                        dialog.dismiss()
+                    }.show()
+            }
             mBinding.moviesList.adapter = mAdapter
         }
         mBinding.refresh.setOnRefreshListener(this)
         mBinding.fabAdd.setOnClickListener {
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
-                PermissionX.init(activity)
-                    .permissions(Manifest.permission.READ_EXTERNAL_STORAGE)
-                    .request { allGranted, _, deniedList ->
-                        if (allGranted) {
-                            viewModel.addMovie()
-                        } else {
-                            Toast.makeText(
-                                context,
-                                "These permissions are denied: $deniedList",
-                                Toast.LENGTH_LONG
-                            ).show()
-                        }
-                    }
-            } else {
-                viewModel.addMovie()
-            }
+            addMovies()
         }
         viewModel.movieList.observe(viewLifecycleOwner) {
             mAdapter.setData(it)
@@ -80,10 +83,80 @@ class MoviesFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
                 mBinding.loading.visibility = View.INVISIBLE
             }
         }
-        viewModel.getMovies()
+
+        viewModel.permissionNeededForDelete.observe(viewLifecycleOwner, { intentSender ->
+            intentSender?.let {
+                startIntentSenderForResult(
+                    intentSender,
+                    DELETE_PERMISSION_REQUEST,
+                    null,
+                    0,
+                    0,
+                    0,
+                    null
+                )
+            }
+        })
+        getMovies()
     }
 
     override fun onRefresh() {
-        viewModel.getMovies()
+        getMovies()
+    }
+
+    private fun getMovies() {
+        PermissionX.init(activity)
+            .permissions(Manifest.permission.READ_EXTERNAL_STORAGE)
+            .request { allGranted, _, deniedList ->
+                if (allGranted) {
+                    viewModel.getMovies()
+                } else {
+                    Toast.makeText(
+                        context,
+                        "These permissions are denied: $deniedList",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+    }
+
+    private fun addMovies() {
+        PermissionX.init(activity)
+            .permissions(Manifest.permission.READ_EXTERNAL_STORAGE)
+            .request { allGranted, _, deniedList ->
+                if (allGranted) {
+                    viewModel.addMovie()
+                } else {
+                    Toast.makeText(
+                        context,
+                        "These permissions are denied: $deniedList",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+    }
+
+    private fun deleteMovie(movie: Movie) {
+        viewModel.deleteMovie(movie)
+//        PermissionX.init(activity)
+//            .permissions(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+//            .request { allGranted, _, deniedList ->
+//                if (allGranted) {
+//                    viewModel.deleteMovie(movie)
+//                } else {
+//                    Toast.makeText(
+//                        context,
+//                        "These permissions are denied: $deniedList",
+//                        Toast.LENGTH_LONG
+//                    ).show()
+//                }
+//            }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK && requestCode == DELETE_PERMISSION_REQUEST) {
+            viewModel.deletePendingMovie()
+        }
     }
 }

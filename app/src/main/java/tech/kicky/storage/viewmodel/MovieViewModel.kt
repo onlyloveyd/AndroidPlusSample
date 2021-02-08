@@ -1,8 +1,10 @@
 package tech.kicky.storage.viewmodel
 
 import android.app.Application
+import android.app.RecoverableSecurityException
 import android.content.ContentUris
 import android.content.ContentValues
+import android.content.IntentSender
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
@@ -43,6 +45,10 @@ class MovieViewModel(application: Application) : AndroidViewModel(application) {
     private val _isRefresh = MutableLiveData(false)
     val isRefresh: LiveData<Boolean> = _isRefresh
 
+    private var pendingDeleteImage: Movie? = null
+    private val _permissionNeededForDelete = MutableLiveData<IntentSender?>()
+    val permissionNeededForDelete: LiveData<IntentSender?> = _permissionNeededForDelete
+
     fun getMovies() {
         val contentResolver = getApplication<Application>().contentResolver
         _isRefresh.value = true
@@ -78,7 +84,7 @@ class MovieViewModel(application: Application) : AndroidViewModel(application) {
             withContext(Dispatchers.IO) {
                 try {
                     val response =
-                        Retrofitance.downloadApi.downloadVideo("https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4")
+                        Retrofitance.downloadApi.downloadVideo("https://raw.fastgit.org/zzuiekongning/sample-videos/master/store-aisle-detection.mp4")
                     if (downloadVideo(response, System.currentTimeMillis().toString())) {
                         _toast.postValue("视频保存成功")
                     } else {
@@ -158,5 +164,42 @@ class MovieViewModel(application: Application) : AndroidViewModel(application) {
             return true
         }
         return false
+    }
+
+    fun deleteMovie(movie: Movie) {
+        viewModelScope.launch {
+            performDeleteMovie(movie)
+        }
+    }
+
+    fun deletePendingMovie() {
+        pendingDeleteImage?.let { image ->
+            pendingDeleteImage = null
+            deleteMovie(image)
+        }
+    }
+
+    private suspend fun performDeleteMovie(movie: Movie) {
+        withContext(Dispatchers.IO) {
+            try {
+                getApplication<Application>().contentResolver.delete(
+                    movie.uri,
+                    "${MediaStore.Video.Media._ID} = ?",
+                    arrayOf(movie.id.toString())
+                )
+            } catch (securityException: SecurityException) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    val recoverableSecurityException =
+                        securityException as? RecoverableSecurityException
+                            ?: throw securityException
+                    pendingDeleteImage = movie
+                    _permissionNeededForDelete.postValue(
+                        recoverableSecurityException.userAction.actionIntent.intentSender
+                    )
+                } else {
+                    throw securityException
+                }
+            }
+        }
     }
 }
