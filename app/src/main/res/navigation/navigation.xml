@@ -19,11 +19,6 @@
             app:destination="@id/scopedStorageFragment" />
     </fragment>
 
-    <fragment
-        android:id="@+id/scopedStorageFragment"
-        android:name="tech.kicky.storage.ScopedStorageFragment"
-        android:label="ScopedStorageFragment"
-        tools:layout="@layout/fragment_scoped_storage" />
 
     <fragment
         android:id="@+id/coroutineSampleFragment"
@@ -66,5 +61,24 @@
         android:name="tech.kicky.coroutine.flow.SharedFlowFragment"
         android:label="SharedFlowFragment"
         tools:layout="@layout/fragment_shared_flow" />
+
+
+    <fragment
+        android:id="@+id/scopedStorageFragment"
+        android:name="tech.kicky.storage.ScopedStorageFragment"
+        android:label="ScopedStorageFragment"
+        tools:layout="@layout/fragment_scoped_storage">
+
+        <action
+            android:id="@+id/scoped_to_movies"
+            app:destination="@id/moviesFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/moviesFragment"
+        android:name="tech.kicky.storage.MoviesFragment"
+        android:label="MoviesFragment"
+        tools:layout="@layout/fragment_movies" />
 
 </navigation>

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import tech.kicky.EntryAdapter
 import tech.kicky.common.addDivider
@@ -21,10 +22,10 @@ class CoroutineSamplesFragment : Fragment() {
     private lateinit var mAdapter: EntryAdapter
 
     private val pairs = listOf(
-        "Basic Coroutine" to CoroutineSamplesFragmentDirections.coroutineToBasic(),
-        "Flow & Room" to CoroutineSamplesFragmentDirections.coroutineToFlow(),
-        "Flow & Retrofit" to CoroutineSamplesFragmentDirections.coroutineToFlowRetrofit(),
-        "Shared Flow" to CoroutineSamplesFragmentDirections.coroutineToSharedFlow()
+        "Basic Coroutine" to { directToTarget(CoroutineSamplesFragmentDirections.coroutineToBasic()) },
+        "Flow & Room" to { directToTarget(CoroutineSamplesFragmentDirections.coroutineToFlow()) },
+        "Flow & Retrofit" to { directToTarget(CoroutineSamplesFragmentDirections.coroutineToFlowRetrofit()) },
+        "Shared Flow" to { directToTarget(CoroutineSamplesFragmentDirections.coroutineToSharedFlow()) }
     )
 
     private val mBinding by lazy {
@@ -42,12 +43,14 @@ class CoroutineSamplesFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         context?.let {
-            mAdapter = EntryAdapter(it) { direction ->
-                findNavController().navigate(direction)
-            }
+            mAdapter = EntryAdapter(it)
             mAdapter.setData(pairs)
             mBinding.sampleList.adapter = mAdapter
             mBinding.sampleList.addDivider(it)
         }
+    }
+
+    private fun directToTarget(direction: NavDirections) {
+        findNavController().navigate(direction)
     }
 }

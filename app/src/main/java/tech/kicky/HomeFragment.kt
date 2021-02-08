@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import tech.kicky.common.addDivider
 import tech.kicky.databinding.FragmentHomeBinding
@@ -18,8 +19,8 @@ import tech.kicky.databinding.FragmentHomeBinding
 class HomeFragment : Fragment() {
 
     private val pairs = listOf(
-        "Kotlin Coroutine" to HomeFragmentDirections.homeToCoroutineSample(),
-        "Scoped Storage" to HomeFragmentDirections.homeToScopedStorage()
+        "Kotlin Coroutine" to { directToTarget(HomeFragmentDirections.homeToCoroutineSample()) },
+        "Scoped Storage" to { directToTarget(HomeFragmentDirections.homeToScopedStorage()) }
     )
     private lateinit var mAdapter: EntryAdapter
 
@@ -38,12 +39,14 @@ class HomeFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         context?.let {
-            mAdapter = EntryAdapter(it) { direction ->
-                findNavController().navigate(direction)
-            }
+            mAdapter = EntryAdapter(it)
             mAdapter.setData(pairs)
             mBinding.menuList.adapter = mAdapter
             mBinding.menuList.addDivider(it)
         }
+    }
+
+    private fun directToTarget(direction: NavDirections) {
+        findNavController().navigate(direction)
     }
 }

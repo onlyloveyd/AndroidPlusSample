@@ -6,7 +6,7 @@ import androidx.lifecycle.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import tech.kicky.coroutine.Article
-import tech.kicky.coroutine.Retrofitance
+import tech.kicky.common.Retrofitance
 import tech.kicky.coroutine.bus.Event
 import tech.kicky.coroutine.bus.LocalEventBus
 import tech.kicky.coroutine.db.AppDatabase

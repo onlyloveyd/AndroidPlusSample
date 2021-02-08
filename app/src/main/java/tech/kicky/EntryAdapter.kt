@@ -13,8 +13,8 @@ import tech.kicky.databinding.RvItemTextBinding
  * @author yidong
  * @date 2/7/21
  */
-class EntryAdapter(context: Context, val click: (NavDirections) -> Unit) :
-    BindingAdapter<Pair<String, NavDirections>>(context) {
+class EntryAdapter(context: Context) :
+    BindingAdapter<Pair<String, () -> Unit>>(context) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindingViewHolder {
         val binding = RvItemTextBinding.inflate(layoutInflater, parent, false)
@@ -26,7 +26,7 @@ class EntryAdapter(context: Context, val click: (NavDirections) -> Unit) :
         val pair = getItem(position)
         binding.tvTitle.text = pair.first
         binding.root.setOnClickListener {
-            click(pair.second)
+            pair.second()
         }
     }
 }

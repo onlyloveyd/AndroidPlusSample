@@ -1,4 +1,4 @@
-package tech.kicky.coroutine
+package tech.kicky.common
 
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -25,5 +25,9 @@ object Retrofitance {
 
     val wanAndroidApi: WanAndroidApi by lazy {
         retrofitance.create(WanAndroidApi::class.java)
+    }
+
+    val downloadApi: DownloadApi by lazy {
+        retrofitance.create(DownloadApi::class.java)
     }
 }
