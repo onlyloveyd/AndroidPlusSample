@@ -19,8 +19,8 @@ import tech.kicky.databinding.FragmentHomeBinding
 class HomeFragment : Fragment() {
 
     private val pairs = listOf(
-        "Kotlin Coroutine" to { directToTarget(HomeFragmentDirections.homeToCoroutineSample()) },
-        "Scoped Storage" to { directToTarget(HomeFragmentDirections.homeToScopedStorage()) }
+        "协程" to { directToTarget(HomeFragmentDirections.homeToCoroutineSample()) },
+        "分区存储" to { directToTarget(HomeFragmentDirections.homeToScopedStorage()) }
     )
     private lateinit var mAdapter: EntryAdapter
 

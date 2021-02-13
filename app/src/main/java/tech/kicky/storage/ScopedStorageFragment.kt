@@ -3,9 +3,6 @@ package tech.kicky.storage
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.provider.MediaStore
-import android.provider.MediaStore.EXTRA_OUTPUT
-import android.provider.MediaStore.EXTRA_SIZE_LIMIT
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +10,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import tech.kicky.EntryAdapter
-import tech.kicky.HomeFragmentDirections
 import tech.kicky.common.addDivider
 import tech.kicky.databinding.FragmentScopedStorageBinding
 
