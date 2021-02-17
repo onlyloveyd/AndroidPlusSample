@@ -17,6 +17,10 @@
         <action
             android:id="@+id/home_to_scoped_storage"
             app:destination="@id/scopedStorageFragment" />
+
+        <action
+            android:id="@+id/home_to_inline_func"
+            app:destination="@id/inlineFuncFragment" />
     </fragment>
 
 
@@ -81,4 +85,9 @@
         android:label="MoviesFragment"
         tools:layout="@layout/fragment_movies" />
 
+    <fragment
+        android:id="@+id/inlineFuncFragment"
+        android:name="tech.kicky.inlinefunc.InlineFuncFragment"
+        android:label="InlineFuncFragment"
+        tools:layout="@layout/fragment_inline_function" />
 </navigation>

@@ -20,7 +20,8 @@ class HomeFragment : Fragment() {
 
     private val pairs = listOf(
         "协程" to { directToTarget(HomeFragmentDirections.homeToCoroutineSample()) },
-        "分区存储" to { directToTarget(HomeFragmentDirections.homeToScopedStorage()) }
+        "分区存储" to { directToTarget(HomeFragmentDirections.homeToScopedStorage()) },
+        "内联函数" to { directToTarget(HomeFragmentDirections.homeToInlineFunc()) }
     )
     private lateinit var mAdapter: EntryAdapter
 
