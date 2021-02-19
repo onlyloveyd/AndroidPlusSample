@@ -21,6 +21,10 @@
         <action
             android:id="@+id/home_to_inline_func"
             app:destination="@id/inlineFuncFragment" />
+
+        <action
+            android:id="@+id/home_to_camerax"
+            app:destination="@id/cameraxFragment" />
     </fragment>
 
 
@@ -90,4 +94,10 @@
         android:name="tech.kicky.inlinefunc.InlineFuncFragment"
         android:label="InlineFuncFragment"
         tools:layout="@layout/fragment_inline_function" />
+
+    <fragment
+        android:id="@+id/cameraxFragment"
+        android:name="tech.kicky.camerax.CameraXFragment"
+        android:label="CameraXFragment"
+        tools:layout="@layout/fragment_camera_x" />
 </navigation>

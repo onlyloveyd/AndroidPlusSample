@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import tech.kicky.databinding.FragmentInlineFunctionBinding
 
 
@@ -14,32 +15,21 @@ class InlineFuncFragment : Fragment() {
         FragmentInlineFunctionBinding.inflate(layoutInflater)
     }
 
+    private val viewModel by viewModels<InlineFuncViewModel>()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        viewModel.text.observe(viewLifecycleOwner) {
+            mBinding.text.text = it ?: ""
+        }
         return mBinding.root
     }
 
     override fun onStart() {
         super.onStart()
-        // 调用打印方法
-        doPrint {
-            printAndroid()
-        }
+        viewModel.fastPost()
     }
 
-    // 定义一个打印方法，传入一个函数参数
-    private fun doPrint(printOne: () -> Unit) {
-        printOne()
-    }
-
-    // 打印一段文字
-    private fun printAndroid() {
-        println("Android")
-    }
-
-    fun printOpenCV() {
-        println("OpenCV")
-    }
 }
