@@ -2,7 +2,6 @@ package tech.kicky
 
 import android.content.Context
 import android.view.ViewGroup
-import androidx.navigation.NavDirections
 import tech.kicky.common.BindingAdapter
 import tech.kicky.common.BindingViewHolder
 import tech.kicky.databinding.RvItemTextBinding

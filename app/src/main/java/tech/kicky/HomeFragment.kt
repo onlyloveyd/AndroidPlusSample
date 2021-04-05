@@ -21,7 +21,7 @@ class HomeFragment : Fragment() {
     private val pairs = listOf(
         "协程" to { directToTarget(HomeFragmentDirections.homeToCoroutineSample()) },
         "分区存储" to { directToTarget(HomeFragmentDirections.homeToScopedStorage()) },
-        "内联函数" to { directToTarget(HomeFragmentDirections.homeToInlineFunc()) }
+        "Item Decoration" to { directToTarget(HomeFragmentDirections.homeToGridItemDecoration()) },
     )
     private lateinit var mAdapter: EntryAdapter
 
@@ -45,6 +45,12 @@ class HomeFragment : Fragment() {
             mBinding.menuList.adapter = mAdapter
             mBinding.menuList.addDivider(it)
         }
+
+        test(*intArrayOf(1, 2, 3, 4))
+    }
+
+    fun test(vararg ints: Int) {
+
     }
 
     private fun directToTarget(direction: NavDirections) {

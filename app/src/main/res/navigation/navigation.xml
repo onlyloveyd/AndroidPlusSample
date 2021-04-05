@@ -19,12 +19,8 @@
             app:destination="@id/scopedStorageFragment" />
 
         <action
-            android:id="@+id/home_to_inline_func"
-            app:destination="@id/inlineFuncFragment" />
-
-        <action
-            android:id="@+id/home_to_camerax"
-            app:destination="@id/cameraxFragment" />
+            android:id="@+id/home_to_grid_item_decoration"
+            app:destination="@id/itemDecorationFragment" />
     </fragment>
 
 
@@ -90,14 +86,8 @@
         tools:layout="@layout/fragment_movies" />
 
     <fragment
-        android:id="@+id/inlineFuncFragment"
-        android:name="tech.kicky.inlinefunc.InlineFuncFragment"
-        android:label="InlineFuncFragment"
-        tools:layout="@layout/fragment_inline_function" />
-
-    <fragment
-        android:id="@+id/cameraxFragment"
-        android:name="tech.kicky.camerax.CameraXFragment"
-        android:label="CameraXFragment"
-        tools:layout="@layout/fragment_camera_x" />
+        android:id="@+id/itemDecorationFragment"
+        android:name="tech.kicky.itemdecoration.GridItemDecorationFragment"
+        android:label="GridItemDecorationFragment"
+        tools:layout="@layout/fragment_grid_item_decoration" />
 </navigation>
