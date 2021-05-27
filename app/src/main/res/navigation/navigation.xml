@@ -21,6 +21,9 @@
         <action
             android:id="@+id/home_to_grid_item_decoration"
             app:destination="@id/itemDecorationFragment" />
+        <action
+            android:id="@+id/home_to_live_data"
+            app:destination="@id/liveDataFragment" />
     </fragment>
 
 
@@ -90,4 +93,11 @@
         android:name="tech.kicky.itemdecoration.GridItemDecorationFragment"
         android:label="GridItemDecorationFragment"
         tools:layout="@layout/fragment_grid_item_decoration" />
+
+    <fragment
+        android:id="@+id/liveDataFragment"
+        android:name="tech.kicky.livedata.LiveDataFragment"
+        android:label="LiveDataFragment"
+        tools:layout="@layout/fragment_live_data" />
+
 </navigation>

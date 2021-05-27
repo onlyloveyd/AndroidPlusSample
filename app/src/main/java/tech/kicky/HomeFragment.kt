@@ -22,6 +22,7 @@ class HomeFragment : Fragment() {
         "协程" to { directToTarget(HomeFragmentDirections.homeToCoroutineSample()) },
         "分区存储" to { directToTarget(HomeFragmentDirections.homeToScopedStorage()) },
         "Item Decoration" to { directToTarget(HomeFragmentDirections.homeToGridItemDecoration()) },
+        "LiveData" to { directToTarget(HomeFragmentDirections.homeToLiveData()) },
     )
     private lateinit var mAdapter: EntryAdapter
 
